@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>result</title>
+</head>
+<body>
+    <h1>회원가입이 완료되었습니다.</h1>
+    <p>아이디: [[${dto.id}]]</p>
+    <p>비밀번호: [[${dto.pwd}]]</p>
+    <p>이메일: [[${dto.email}]]</p>
+    <p>나이: [[${dto.age}]]</p>
+    <p>가입일: [[${#dates.format(dto.regdate,'yyyy-MM-dd')}]]</p>
+    <a th:href="@{/}">홈으로</a>
+</body>
+</html>
