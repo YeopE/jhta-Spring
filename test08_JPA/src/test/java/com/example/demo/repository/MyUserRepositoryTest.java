@@ -14,11 +14,11 @@ public class MyUserRepositoryTest {
     @Autowired
     private MyUserRepository myUserRepository;
 
-    @Test
-    public void insert() {
-        MyUser myUser = new MyUser(1,"홍길동","010-1111-1111","서울");
-        myUserRepository.insert(myUser);
-    }
+//    @Test
+//    public void insert() {
+//        MyUser myUser = new MyUser(1,"홍길동","010-1111-1111","서울");
+//        myUserRepository.insert(myUser);
+//    }
 
     @Test
     public void select() {
@@ -26,10 +26,10 @@ public class MyUserRepositoryTest {
         System.out.println(myUser);
     }
 
-    @Test
-    public void update() {
-        myUserRepository.update(new MyUser(1,"일길동","010-1234-1234","부산"));
-    }
+//    @Test
+//    public void update() {
+//        myUserRepository.update(new MyUser(1,"일길동","010-1234-1234","부산"));
+//    }
 
     @Test
     public void delete() {

@@ -12,7 +12,7 @@ import lombok.*;
 @Setter
 @Getter
 @ToString
-@Table(name="Members") //테이블명 변경시 사용하는 어노테이션
+@Table(name="Member") //테이블명 변경시 사용하는 어노테이션
 public class Member {
     @Id //PK가 되는 컬럼을 의미
     private String id;

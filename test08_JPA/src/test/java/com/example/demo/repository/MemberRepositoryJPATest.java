@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -45,5 +47,42 @@ public class MemberRepositoryJPATest {
         m.setAge(30);
         m.setPassword("0000");
         System.out.println("수정완료");
+    }
+    
+    @Test
+    public void selectList() {
+        List<Member> list = mr.findAll(); //전체데이터 조회
+        for(Member member : list) {
+            System.out.println(member);
+        }
+    }
+
+    @Test
+    public void selectOnd() {
+        Member member = mr.select("hello");
+        System.out.println(member);
+    }
+
+    @Test
+    public void findMember() {
+        Member member = mr.findMember("hello","0000");
+        System.out.println(member);
+    }
+
+    @Test
+    public void findAge() {
+        List<Member> list = mr.findAgeMember(20);
+        list.forEach(e->{
+            System.out.println(e);
+        });
+    }
+
+    @Test
+    public void findIds() {
+        List<String> ids = new ArrayList<>();
+        ids.add("hello");
+        ids.add("test");
+        List<Member> list = mr.findMembers(ids);
+        list.forEach(System.out::println);
     }
 }

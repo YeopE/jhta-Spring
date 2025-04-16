@@ -16,11 +16,11 @@ public class MyUserRepositoryJPATest {
     @Autowired
     private MyUserRepositoryJPA mr;
 
-    @Test
-    public void insert() {
-        MyUser mu = mr.save(new MyUser(1,"홍길동","010-1111-1111","서울"));
-        System.out.println("등록완료==>" + mu);
-    }
+//    @Test
+//    public void insert() {
+//        MyUser mu = mr.save(new MyUser(1,"홍길동","010-1111-1111","서울"));
+//        System.out.println("등록완료==>" + mu);
+//    }
 
     @Test
     public void delete() {
@@ -38,12 +38,12 @@ public class MyUserRepositoryJPATest {
         }
     }
 
-    @Test
-    public void update() {
-        MyUser mu = mr.findById(2).get();
-        mu.setName("이길동");
-        mu.setPhone("010-2222-2222");
-        mu.setAddr("부산");
-        System.out.println("수정완료");
-    }
+//    @Test
+//    public void update() {
+//        MyUser mu = mr.findById(2).get();
+//        mu.setName("이길동");
+//        mu.setPhone("010-2222-2222");
+//        mu.setAddr("부산");
+//        System.out.println("수정완료");
+//    }
 }
