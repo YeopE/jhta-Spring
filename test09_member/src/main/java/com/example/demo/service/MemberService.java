@@ -1,10 +1,13 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.MemberDTO;
+import com.example.demo.dto.PageResultDTO;
 import com.example.demo.entity.Member;
 import com.example.demo.repository.MemberRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,18 +28,18 @@ public class MemberService {
     }
 
     //전체목록 반환하는 메소드
-    public List<MemberDTO> list() {
-        List<Member> mlist = mr.findAll();
-//        기본코드
-//        List<MemberDTO> dtoList = mlist.stream().map(m->{
-//            return new MemberDTO(m);
-//        }).toList();
-//        람다식
-//        List<MemberDTO> dtoList = mlist.stream().map(m->new MemberDTO(m)).toList();
-//        메서드참조
-        List<MemberDTO> dtoList = mlist.stream().map(MemberDTO::new).toList();
-        return dtoList;
-    }
+//    public List<MemberDTO> list() {
+//        List<Member> mlist = mr.findAll();
+////        기본코드
+////        List<MemberDTO> dtoList = mlist.stream().map(m->{
+////            return new MemberDTO(m);
+////        }).toList();
+////        람다식
+////        List<MemberDTO> dtoList = mlist.stream().map(m->new MemberDTO(m)).toList();
+////        메서드참조
+//        List<MemberDTO> dtoList = mlist.stream().map(MemberDTO::new).toList();
+//        return dtoList;
+//    }
 
     public void delete(String id) {
         mr.deleteById(id);
@@ -63,5 +66,13 @@ public class MemberService {
             return new MemberDTO(m2);
         }
         return null;
+    }
+
+    //페이징 처리
+    public PageResultDTO pageList (Pageable pageable) {
+        Page<Member> page = mr.findAll(pageable);
+        List<MemberDTO> list = page.stream().map(m->new MemberDTO(m)).toList();
+        PageResultDTO dto = new PageResultDTO(list, page.getNumber(), page.getTotalPages(), 5);
+        return dto;
     }
 }

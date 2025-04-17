@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>board/update.html</title>
+</head>
+<body>
+<h1>게시글 수정</h1>
+<form method="post" th:action="@{/board/update}" th:object="${dto}">
+	글번호 <input type="text" name="num" th:field="*{num}" readonly><br>
+	작성자 <input type="text" name="id" th:field="*{id}" readonly><br>
+	글제목 <input type="text" name="title" th:field="*{title}"><br>
+	글내용 <input type="text" name="content" th:field="*{content}"><br>
+	작성일 <input type="text" name="regdate" th:field="*{regdate}" disabled><br>
+	<input type="submit" value="수정">
+</form>
+</body>
+</html>

@@ -28,10 +28,10 @@ public class MemberServiceTest {
 //        service.insert(dto);
     }
 
-    @Test
-    public void list() {
-        service.list().forEach(System.out::println);
-    }
+//    @Test
+//    public void list() {
+//        service.list().forEach(System.out::println);
+//    }
 
     @Test
     public void update() {
@@ -45,4 +45,5 @@ public class MemberServiceTest {
     public void delete() {
         service.delete("hello");
     }
+
 }
