@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>sum.html</title>
+</head>
+<body>
+  <form method="post" th:action="@{/sum}">
+    <h1>두수 합 구하기</h1>
+    <input type="text" name="num1">
+    <span>+</span>
+    <input type="text" name="num2">
+    <input type="submit" value="더하기">
+  </form>
+</body>
+</html>

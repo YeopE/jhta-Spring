@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>mydate</title>
+</head>
+<body>
+<h1>날짜정보</h1>
+<div th:text="${date1}"></div>
+<!-- 날짜 포맷 -->
+현재 시간 <span th:text="${#dates.format(date1, 'yyyy-MM-dd HH:mm:ss')}"></span><br><!-- dates (Thymeleaf가 제공하는 객체) format(date target, String pattren) -->
+Year : <span th:text="${#dates.year(date1)}"></span> 년 <br>
+Month : <span th:text="${#dates.month(date1)}"></span> 월 <br>
+day : <span th:text="${#dates.day(date1)}"></span> 일 <br>
+<div th:text="${date2}"></div>
+<!-- 날짜 포맷 -->
+<!-- #temporals : 자바8버전의 date 지원 -->
+현재 시간 <span th:text="${#temporals.format(date2, 'yyyy-MM-dd HH:mm:ss')}"></span> <!-- LocalDateTime.now() 에는 temporals 사용  -->
+
+<div th:with="text='Hello World'">
+    <span th:text="${#strings.substring(text,1,4)}"></span>
+    <span th:text="${#strings.length(text)}"></span>
+    <span th:text="${#strings.replace(text,'Hello','안녕')}"></span>
+</div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>sumResult</title>
+</head>
+<body>
+    <h1>두수 합</h1>
+    <span th:text="${param.num1}"></span> <!-- param은 스피링부트의 내장 객체 model.addAttribute에 담지 않아도 파라미터값을 가져와 쓸 수 있다.-->
+    <span>+</span>
+    <span th:text="${param.num2}"></span>
+    <span>=</span>
+    <span th:text="${sum}"></span>
+</body>
+</html>

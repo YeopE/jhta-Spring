@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>member/result.html</title>
+</head>
+<body>
+    <h1>회원가입 완료!</h1>
+    <div th:text="'아이디:' + ${member.id}"></div>
+    <div th:text="'비밀번호:' + ${member.pwd}"></div>
+    <div th:text="'이메일:' + ${member.email}"></div>
+    <div th:text="|미성년자: ${member.minor}|"></div> <!-- 자바스크립트의 백틱 처럼 쓸 수도 있다. |을 -->
+    <a th:href="@{/}">홈</a>
+</body>
+</html>

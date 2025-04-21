@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>반갑습니다~~~</h1>
+    <h2 th:text="${msg}"></h2>
+    <div>[[${msg}]]</div>
+        <ul>
+            <li>
+                <a th:href="@{/main}">메인페이지 이동</a>
+            </li>
+            <li>
+                <a th:href="@{/member/join}">회원가입</a>
+            </li>
+            <li>
+                <a th:href="@{/sum}">두수합구하기</a>
+            </li>
+            <li>
+                <a th:href="@{/list1}">꽃이름출력</a>
+            </li>
+            <li>
+                <a th:href="@{/link1(id='aaa',pwd='1234')}">Link1</a>
+            </li>
+            <li>
+                <a th:href="@{/link2/{id}/{pwd}(id='hello',pwd='1234')}">Link2</a>
+            </li>
+            <li>
+                <a th:href="@{/mydate}">date format</a>
+            </li>
+        </ul>
+    <img th:src="@{/images/1.png}">
+</body>
+</html>

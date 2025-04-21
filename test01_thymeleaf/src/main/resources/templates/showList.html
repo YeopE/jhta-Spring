@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>showList.html</title>
+</head>
+<body>
+  <h1>꽃이름</h1>
+  <ul>
+    <li th:each="f:${flowers}"> <!-- flowers에서 값을 꺼내와 f라는 변수에 담는다. -->
+      <span th:text="${f}"></span>
+    </li>
+  </ul>
+  <h1>회원목록</h1>
+  <ul>
+    <li th:each="user,status : ${users}"> <!-- status는 변수명(아무렇게나 지어도 된다.) -->
+      <span>index: [[${status.index}]], count: [[${status.count}]]</span>
+      <span>이름: [[${user.username}]]</span>
+      <span>비밀번호: [[${user.password}]]</span>
+    </li>
+  </ul>
+<!-- 지역변수 선언 -->
+<div th:with="msg='Hello World'">
+  [[${msg}]]
+</div>
+<div th:with="myuser=${users[0]}">
+  [[${myuser.username}]] [[${myuser.password}]]
+</div>
+
+<!-- Member객체를 5개 List에 담고 출력해 보세요. -->
+<h1>멤버목록</h1>
+<ul>
+  <li th:each="member : ${members}">
+    <span>아이디: [[${member.id}]]</span>
+    <span>비밀번호: [[${member.pwd}]]</span>
+    <span>이메일: [[${member.email}]]</span>
+    <span>미성년자 여부: [[${member.minor}]]</span>
+  </li>
+</ul>
+
+<!-- Map에 저장된 값 꺼내오기 -->
+이름 : <sapn th:text="${map['name']}"></sapn>
+이메일 : <span th:text="${map['email']}"></span>
+
+<!-- Map에 User객체를 담고 꺼내와서 출력해 보세요. -->
+  <div th:text="${userMap['user1']}"></div>
+  <div th:text="${userMap['user1'].username}"></div>
+  <div th:text="${userMap['user1'].password}"></div>
+  <div th:text="${userMap['user2'].password}"></div>
+  <div th:text="${userMap['user2'].password}"></div>
+</body>
+</html>
