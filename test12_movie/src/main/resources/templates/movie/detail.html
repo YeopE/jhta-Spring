@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>movie/detail.html</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<style>
+		.active {
+        font-size: 1.3em;
+				color: red;
+		}
+		#commList div {
+				width: 300px;
+				border: 1px solid #000;
+				border-radius: 10px;
+				margin-bottom: 10px;
+				padding: 10px;
+		}
+
+    #commList div a {
+		    display: inline-block;
+		    margin-top: 30px;
+    }
+
+    #commList div input,
+    #commList div textarea {
+		    width: 97%;
+		    resize: none;
+    }
+
+
+	</style>
+</head>
+
+<body>
+	<div>
+		<h1>영화제목 [[${movie.title}]]</h1>
+		<p th:text="'영화감독 : ' + ${movie.director}"></p>
+		<p th:text="|줄거리 : ${movie.content}|"></p>
+		<!-- 댓글목록이 보여질 div -->
+		<div id="commList"></div>
+		<!-- 댓글등록 폼 -->
+		<div class="commentsForm">
+			<h3>댓글</h3>
+			<p>작성자<br><input type="text" id="id"></p>
+			<p>내용<br><textarea id="comments"></textarea></p>
+			<p><input type="button" id="btnSave" value="등록"></p>
+		</div>
+	</div>
+
+	<script th:inline="javascript">
+		const mnum = [[${movie.mnum}]] //영화번호
+		// alert("영화번호:" + mnum);
+		//ajax로 댓글 등록 하기
+		$("#btnSave").click(function (){
+				const data={
+            "mnum" : mnum,
+						"id":$("#id").val(),
+						"comments":$("#comments").val()
+				}
+				const param = JSON.stringify(data);
+				$.ajax({
+						url:'/comments',
+						method:'POST',
+						contentType:'application/json',
+						data: param,
+						success:function (res) {
+								console.log(res);
+						}
+				})
+		})
+
+		function commentsList(page){
+				$.ajax({
+						url:'/comments?mnum=' + mnum + '&page=' + page,
+						dataType:'json',
+						success:function (resp) {
+								let html="";
+								$(resp.list).each(function (i,comm){
+										html += `<div class="comm">
+															아이디<br>
+															<input type="text" name="commId" class="commId" value="${comm.id}" readonly><br>
+															내용<br>
+															<textarea name="commText" class="commText" cols="30" rows="10" readonly>${comm.comments}</textarea><br>
+															<a class="updateBtn" href="javascript:updateComm(${i},'${comm.cnum}')">수정</a>
+															<a href="javascript:delComm('${comm.cnum}')" onclick="confirm('정말로 삭제하시겠습니까?')">삭제</a>
+														</div>`;
+								});
+								$("#commList").html(html);
+								//페이징처리아이디수정
+								let pageing="";
+								//이전페이지
+								if(resp.startPage>2){
+										pageing +="<a href='javascript:commentsList(" + (resp.startPage-1) +")'>이전</a>";
+								}
+								for(let i=resp.startPage; i<=resp.endPage; i++){
+										if(i==page) {
+												pageing += "<a class='active' href='javascript:commentsList("+ i +")'>["+ i +"]</a>";
+										}else {
+												pageing += "<a href='javascript:commentsList("+ i +")'>["+ i +"]</a>";
+										}
+								}
+								//다음페이지
+								if(resp.endPage<resp.totalPageCount-1){
+										pageing +="<a href='javascript:commentsList(" + (resp.endPage + 1) + ")'>다음</a>";
+								}
+								$("#commList").append(pageing);
+						}
+				})
+		}
+    commentsList(0);
+
+		function delComm(cnum) {
+			$.ajax({
+					url:'/comments/' + cnum,
+					method: 'DELETE',
+					success: function (resp){
+            alert("삭제가 완료되었습니다.");
+            commentsList(0);
+					}
+			})
+		}
+
+    function updateComm(i, cnum) {
+		    // alert(i + "," + cnum);
+		    let comm = $(".comm")[i];
+		    $(comm).find(".commId").prop("readonly", false);
+		    $(comm).find(".commText").prop("readonly", false);
+		    $(comm).find(".commid").focus();
+		    $(comm).find('.updateBtn').prop('text','저장').click(function (){
+				    const id = $(comm).find(".commId").val();
+				    const comments = $(comm).find(".commText").val();
+				    let param = {"id": id, "comments": comments, "cnum": cnum, "mnum": mnum};
+				    param = JSON.stringify(param);
+				    $.ajax({
+						    url:"/comments",
+						    data:param,
+						    type:'PUT',
+						    contentType:'application/json',
+						    dataType:'text',
+						    success:function (data) {
+								    alert(data);
+								    $(comm).find("input[type='text']").prop('readonly',true);
+								    $(comm).find('.updateBtn').prop('text','수정')
+								    commentsList(0);
+						    }
+				    });
+		    });
+    }
+
+
+
+
+	</script>
+</body>
+</html>
