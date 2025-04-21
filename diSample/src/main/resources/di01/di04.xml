@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="di04.BoardImplDao" name="dao"/>
+
+    <bean class="di04.BoardController" name="boardController">
+        <constructor-arg ref="dao"/> <!-- 생성자 사용시 constructor-arg 사용 -->
+    </bean>
+</beans>

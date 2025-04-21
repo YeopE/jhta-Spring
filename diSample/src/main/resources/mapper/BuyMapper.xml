@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BuyMapper">
+    <insert id="insert" parameterType="dto.BuyDto">
+        <selectKey resultType="int" keyProperty="buynum" order="BEFORE">
+            select buy_seq.nextval
+            from dual
+        </selectKey>
+        insert into buy values(#{buynum},#{id},#{pname},#{price},#{amount},sysdate)
+    </insert>
+
+    <update id="update" parameterType="dto.BuyDto">
+        update buy set pname=#{pname}, price=#{price}, amount=#{amount} where buynum = #{buynum}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from buy where buynum = #{num}
+    </delete>
+
+    <select id="selectAll" resultType="dto.BuyDto">
+        select buynum, id, pname, price, amount, regdate from buy
+    </select>
+</mapper>

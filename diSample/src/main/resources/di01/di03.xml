@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- OracleDao생성 -->
+<!--    <bean class="di03.OracleDao" name="oracleDao"/>-->
+    <bean class="di03.MysqlDao" name="mysqlDao"/>
+    <!-- OracleDao를 주입받는 Boardcontroller생성 -->
+    <bean class="di03.BoardController" name="boardController">
+        <property name="dao" ref="mysqlDao"/> <!-- name = 멤버변수, ref = OracleDao,MysqlDao의 name -->
+        <!-- controller에서 setter 사용시 property, 생성자 사용시 constructor-arg 사용 -->
+    </bean>
+
+</beans>
