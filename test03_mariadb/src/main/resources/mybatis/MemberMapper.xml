@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.MemberMapper"> <!-- MembersMapper 인터페이스에 @Mapper를 이용할 경우 namespace와 경로가 정확히 일치해야 한다. -->
+   <insert id="insert" parameterType="MemberDTO">
+	insert into member values(#{id},#{pwd},#{email},#{age},now())
+   </insert>
+
+    <select id="selectAll" resultType="MemberDTO">
+        select id,pwd,email,age,regdate from member
+    </select>
+
+    <delete id="delete" parameterType="String">
+        delete from member where id = #{id}
+    </delete>
+
+    <select id="selectId" parameterType="String" resultType="MemberDTO">
+        select id,pwd,email,age,regdate from member where id = #{id}
+    </select>
+
+    <update id="update" parameterType="MemberDTO">
+        update member set pwd=#{pwd},email=#{email} where id=#{id}
+    </update>
+
+    <select id="list" resultType="MemberDTO" parameterType="hashmap">
+        select * from member order by regdate desc
+        limit #{startRow}, 3
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*) from member
+    </select>
+
+    <select id="isMember" parameterType="hashmap" resultType="MemberDTO">
+        select id,pwd,email,age,regdate from member
+        where id = #{id} and pwd = #{pwd}
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+

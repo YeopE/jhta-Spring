@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>member/update.html</title>
+</head>
+<body>
+<form method="post" th:action="@{/member/update}" th:object="${dto}">
+  <h1>회원정보수정</h1>
+  아이디 <input th:field="*{id}" type="text" readonly><br>
+  비밀번호 <input th:field="*{pwd}" type="password"><br>
+  이메일 <input th:field="*{email}" type="text"><br>
+  나이 <input th:field="*{age}" type="text" readonly><br>
+  가입일 <input th:field="*{regdate}" type="text" disabled><br>
+  <input type="submit" value="수정">
+</form>
+</body>
+</html>
