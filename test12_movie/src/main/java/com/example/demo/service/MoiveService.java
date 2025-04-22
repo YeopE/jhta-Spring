@@ -14,7 +14,7 @@ import java.util.Optional;
 @Transactional
 @RequiredArgsConstructor
 public class MoiveService {
-    private final MovieRepository movieRepository;
+    private final M정보ovieRepository movieRepository;
 
     // 저장
     public MovieDTO save(MovieDTO dto) {

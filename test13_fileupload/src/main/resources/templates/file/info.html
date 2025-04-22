@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>file/info.html</title>
+</head>
+<body>
+<h1>파일정보</h1>
+<table border="1">
+	<tr>
+		<td>파일번호</td>
+		<td th:text="${dto.filenum}"></td>
+	</tr>
+	<tr>
+		<td>작성자</td>
+		<td th:text="${dto.writer}"></td>
+	</tr>
+	<tr>
+		<td>제목</td>
+		<td th:text="${dto.title}"></td>
+	</tr>
+	<tr>
+		<td>내용</td>
+		<td th:text="${dto.content}"></td>
+	</tr>
+	<tr>
+		<td>원본파일명</td>
+		<td th:text="${dto.orgfilename}"></td>
+	</tr>
+	<tr>
+		<td>파일크기</td>
+		<td th:text="${dto.filesize}"></td>
+	</tr>
+	<tr>
+		<td>이미지</td>
+		<td><img th:src="|/images/${dto.savefilename}|"></td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<a th:href="@{/file/delete(filenum=${dto.filenum})}">삭제</a>
+			<a th:href="@{/file/update(filenum=${dto.filenum})}">수정</a>
+			<a th:href="@{/file/download(filenum=${dto.filenum})}">다운로드</a>
+		</td>
+	</tr>
+</table>
+<a th:href="@{/}">홈으로 이동</a>
+</body>
+</html>

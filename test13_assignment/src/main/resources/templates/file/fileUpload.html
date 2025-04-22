@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>file/fileInsert.html</title>
+</head>
+<body>
+<h1>파일 등록</h1>
+<form method="post" th:action="@{/file/upload}" enctype="multipart/form-data">
+	<label>제목</label>
+	<input type="text" name="writer"><br>
+	<label>첨부파일</label>
+	<input type="file" name="file1"><br>
+	<input type="submit" value="등록">
+</form>
+</body>
+</html>
