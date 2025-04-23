@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>user/join.html</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+<body>
+<button id="join1">회원가입</button> <button id="join2">관리자가입</button>
+<div id="memberjoin">
+	<h1>회원 가입</h1>
+	<form th:action="@{/user/join}" method="post">
+		<label for="username1">Username:</label>
+		<input type="text" name="username" id="username1">
+		<br/>
+		<label for="password1">Password:</label>
+		<input type="password" name="password" id="password1">
+		<br/>
+		<input type="hidden" name="role" value="MEMBER">
+		<button type="submit">가입</button>
+	</form>
+</div>
+<div id="adminjoin">
+	<h1>관리자 가입</h1>
+	<form th:action="@{/user/join}" method="post">
+		<label for="username2">Username:</label>
+		<input type="text" name="username" id="username2">
+		<br/>
+		<label for="password2">Password:</label>
+		<input type="password" name="password" id="password2">
+		<br/>
+		<input type="hidden" name="role" value="ADMIN">
+		<button type="submit">가입</button>
+	</form>
+</div>
+<script>
+	$("#memberjoin").hide();
+  $("#adminjoin").hide();
+
+  $("#join1").click(function (){ //회원가입
+		$("#memberjoin").show();
+    $("#adminjoin").hide();
+  });
+  $("#join2").click(function (){ //관리자가입
+		$("#adminjoin").show();
+    $("#memberjoin").hide();
+  });
+</script>
+</body>
+</html>
