@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="layout(title,content)">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${title}">index.html</title>
+</head>
+<body>
+	<header>
+		<h1><a th:href="@{/}">Logo</a></h1>
+		<div>
+			<ul>
+				<li>
+					<a th:href="@{/member/login}">로그인</a>
+				</li>
+				<li>
+					<a href="#none">로그아웃</a>
+				</li>
+				<li>
+					<a th:href="@{/member/join}">회원가입</a>
+				</li>
+				<li>
+					<a href="#none">게시판</a>
+				</li>
+				<li>
+					<a href="#none">회원리스트</a>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<main>
+		<div th:replace="${content}"></div>
+	</main>
+	<footer>
+		<h3>footer영역</h3>
+		<p>footer영역입니다.</p>
+	</footer>
+</body>
+</th:block>
+</html>

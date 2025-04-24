@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/index::layout('로그인',~{this::memberlogin})}">
+	<div th:fragment="memberlogin">
+		<h2>로그인</h2>
+		<form method="post" th:action="@{/loginOk}">
+			<lable>아이디</lable>
+			<input type="text" name="id" id="id">
+			<label>비밀번호</label>
+			<input type="password" name="pwd" id="pwd">
+			<input type="submit" value="로그인">
+		</form>
+	</div>
+</th:block>
+</html>

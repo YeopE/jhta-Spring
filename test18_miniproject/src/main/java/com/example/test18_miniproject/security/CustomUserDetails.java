@@ -1,34 +1,35 @@
-package com.example.demo.security;
+package com.example.test18_miniproject.security;
 
-import com.example.demo.entity.User;
+import com.example.test18_miniproject.dto.Member1DTO;
+import com.example.test18_miniproject.entity.Member1;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-// 추상메소드 오버라이딩 ctrl + i
-public class CustomUserDetails implements UserDetails {
-    private User user;
 
-    public CustomUserDetails(User user){
-        this.user=user;
+public class CustomUserDetails implements UserDetails {
+    private Member1 member1;
+
+    public CustomUserDetails(Member1 member1){
+        this.member1=member1;
     }
-    //사용자가 가지고 있는 권한(ROLE권한)
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
+        authorities.add(new SimpleGrantedAuthority(member1.getRole()));
         return authorities;
     }
-    //사용자 비밀번호 반환
+
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return member1.getPwd();
     }
-    //사용자 이름 반환
+
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return member1.getId();
     }
 }

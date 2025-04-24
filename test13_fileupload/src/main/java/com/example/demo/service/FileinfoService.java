@@ -19,8 +19,7 @@ public class FileinfoService {
         return new FileinfoDTO(fileinfoRepository.save(dto.toEntity()));
     }
     public List<FileinfoDTO> list() {
-        return fileinfoRepo
-        sitory.findAll().stream().map(f->new FileinfoDTO(f)).toList();
+        return fileinfoRepository.findAll().stream().map(f->new FileinfoDTO(f)).toList();
     }
     public FileinfoDTO select(long filenum) {
         return new FileinfoDTO(fileinfoRepository.findById(filenum).get());

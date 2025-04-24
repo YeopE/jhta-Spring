@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/index::layout('회원가입',~{this::memberjoin})}">
+<div th:fragment="memberjoin">
+	<form method="post" th:action="@{/member/join}">
+		<label>아이디</label><br>
+		<input type="text" name="id" id="id"><br>
+		<label>비밀번호</label><br>
+		<input type="password" name="pwd" id="pwd"><br>
+		<label>전화번호</label><br>
+		<input type="phone" name="phone" id="phone"><br>
+		<label>이메일</label><br>
+		<input type="email" name="email" id="email"><br>
+		<label>주소</label><br>
+		<input type="addr" name="addr" id="addr"><br>
+		<input type="submit" value="가입">
+	</form>
+</div>
+</th:block>
+</html>

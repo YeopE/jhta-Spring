@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:ht="http://www.thymeleaf.org">
+<ht:block th:replace="~{/index::layout('회원가입',~{this::joinResult})}">
+	<div th:fragment="joinResult">
+		<h2>회원가입을 축하합니다.</h2>
+		<p>아이디</p>
+		<p th:text="${dto.getId()}"></p>
+		<p>전화번호</p>
+		<p th:text="${dto.getPhone()}"></p>
+		<p>이메일</p>
+		<p th:text="${dto.getEmail()}"></p>
+		<p>가입일</p>
+		<p th:text="${#dates.format(dto.getRegdate(), 'yyyy-MM-dd')}"></p>
+	</div>
+</ht:block>
+</html>
