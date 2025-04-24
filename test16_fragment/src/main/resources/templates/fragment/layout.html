@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="layout(title,content)">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${title}">fragment/layout.html</title>
+</head>
+<body>
+	<div>
+		<h1>header...</h1>
+		<ul>
+			<li>
+				<a href="">로그인</a>
+			</li>
+			<li>
+				<a href="">상품페이지</a>
+			</li>
+			<li>
+				<a href="">게시판</a>
+			</li>
+		</ul>
+	</div>
+	<div>
+		<div th:replace="${content}"></div>
+	</div>
+	<div>
+		<h3>footer....</h3>
+		<div>회사주소 : 서울시 종로구 xxx 고객센터 : 02-xxxx-xxxx</div>
+	</div>
+</body>
+</th:block>
+</html>
