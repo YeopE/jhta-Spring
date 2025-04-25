@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/index::layout('회원정보',~{this::memberUpdate})}">
+	<div th:fragment="memberUpdate">
+		<h2>회원정보</h2>
+		<form method="post" th:action="@{/member/update}">
+			<label>아이디</label><br>
+			<input type="text" name="id" id="id" th:value="${dto.getId()}" readonly><br>
+			<label>비밀번호</label><br>
+			<input type="password" name="pwd" id="pwd"><br>
+			<label>전화번호</label><br>
+			<input type="text" name="phone" id="phone" th:value="${dto.getPhone()}"><br>
+			<label>이메일</label><br>
+			<input type="text" name="email" id="email" th:value="${dto.getEmail()}"><br>
+			<label>주소</label><br>
+			<input type="text" name="addr" id="addr" th:value="${dto.addr}"><br>
+			<label>가입일</label><br>
+			<input type="text" th:value="${#dates.format(dto.getRegdate(), 'yyyy-MM-dd')}" disabled><br>
+			<input type="submit" value="수정">
+		</form>
+	</div>
+</th:block>
+</html>

@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class MemberJoinController {
     private final Member1Service member1Service;
 
-    @GetMapping("/member/join")
+    @GetMapping("/join")
     public String memberJoinForm() {
         return "member/memberjoin";
     }
 
-    @PostMapping("/member/join")
+    @PostMapping("/join")
     public String memberJoin(Member1DTO member1DTO,
                              Model model) {
         try {

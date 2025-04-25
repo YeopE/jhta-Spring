@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/index::layout('회원목록',~{this::memberList})}">
+	<div th:fragment="memberList">
+		<h2>회원목록</h2>
+		<table border="1">
+			<tr>
+				<th>아이디</th>
+				<th>연락처</th>
+				<th>이메일</th>
+				<th>주소</th>
+				<th>권한</th>
+				<th>가입일</th>
+				<th>삭제</th>
+			</tr>
+			<tr th:each=" dto : ${list}">
+				<td th:text="${dto.id}"></td>
+				<td th:text="${dto.phone}"></td>
+				<td th:text="${dto.email}"></td>
+				<td th:text="${dto.addr}"></td>
+				<td th:text="${dto.role}"></td>
+				<td th:text="${#dates.format(dto.regdate, 'yyyy-MM-dd')}"></td>
+				<td>
+					<a th:href="@{/admin/delete/{idNum}(idNum=${dto.idNum})}" onclick="return confirm('정말로 삭제하시겠습니까?')">삭제</a>
+				</td>
+			</tr>
+		</table>
+		<div>
+			<span th:if="${startPage>2}">
+				<a th:href="@{/admin/memberList(page=${startPage-1})}" th:text="이전"></a>
+			</span>
+			<span th:each="num:${#numbers.sequence(startPage,endPage)}">
+				<a th:classappend="${page==num}?active" th:href="@{/admin/memberList(page=${num})}">[[${num + 1}]]</a>
+			</span>
+			<span th:if="${endPage<pageCount-1}">
+				<a th:href="@{/admin/memberList(page=${endPage+1})}" th:text="다음"></a>
+			</span>
+		</div>
+	</div>
+</th:block>
+</html>

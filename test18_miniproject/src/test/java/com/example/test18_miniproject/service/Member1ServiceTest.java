@@ -1,10 +1,12 @@
 package com.example.test18_miniproject.service;
 
 import com.example.test18_miniproject.dto.Member1DTO;
+import com.example.test18_miniproject.dto.PageResultDTO;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.annotation.Commit;
 
 @SpringBootTest
@@ -33,6 +35,25 @@ public class Member1ServiceTest {
         }else {
             System.out.println("불일치");
         }
+    }
 
+    @Test
+    public void update() {
+        Member1DTO dto = member1Service.findById("aaa");
+        System.out.println("변경전 dto ==>" + dto);
+        Member1DTO updateDTO = member1Service.memberUpdate(new Member1DTO(0L,"aaa","1111","010-1111-1111","a@a.com","충청도",null, null));
+        System.out.println("변경후 dto ==>" + dto);
+    }
+
+    @Test
+    public void List() {
+        PageRequest pageable = PageRequest.of(0, 5);
+        PageResultDTO dto = member1Service.pageList(pageable);
+        System.out.println(dto);
+    }
+
+    @Test
+    public void delete() {
+        member1Service.memberDelete(2L);
     }
 }

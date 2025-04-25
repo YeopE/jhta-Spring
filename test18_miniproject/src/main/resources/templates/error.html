@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/index::layout('error',~{this::accessError})}">
+	<div th:fragment="accessError">
+		<h2>관리자만 접근이 가능합니다.</h2>
+		<a th:href="@{/}">메인페이지로 이동</a>
+	</div>
+</th:block>
+</html>

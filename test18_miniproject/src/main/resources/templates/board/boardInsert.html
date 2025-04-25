@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/index::layout('글 작성',~{this::write})}">
+	<div th:fragment="write">
+		<h2>글 작성하기</h2>
+		<form method="post" th:action="@{/member/boardInsert}" enctype="multipart/form-data">
+			<label>제목</label>
+			<input type="text" name="title"><br>
+			<label>내용</label>
+			<textarea name="content" rows="5" cols="50"></textarea><br>
+			<label>첨부파일</label><br>
+			<input type="file" name="fileList"><br>
+			<input type="file" name="fileList"><br>
+			<input type="file" name="fileList"><br>
+			<input type="submit" value="작성">
+		</form>
+	</div>
+</th:block>
+</html>

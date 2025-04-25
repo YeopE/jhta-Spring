@@ -4,10 +4,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MemberLoginController {
-    @GetMapping("/login")
-    public String loginForm() {
-        return "member/memberLogin";
+public class BoardListController {
+
+    @GetMapping("/boardList")
+    public String boardList() {
+
+        return "board/boardList";
     }
+
 
 }

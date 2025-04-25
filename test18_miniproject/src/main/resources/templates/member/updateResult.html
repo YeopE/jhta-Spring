@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/index::layout('회원정보수정',~{this::memberUpdateResult})}">
+	<div th:fragment="memberUpdateResult">
+		<h2>회원정보 수정 완료</h2>
+	</div>
+</th:block>
+</html>
