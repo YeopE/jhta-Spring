@@ -1,4 +1,4 @@
-package com.example.test18_miniproject.controller;
+package com.example.test18_miniproject.controller.member;
 
 import com.example.test18_miniproject.service.Member1Service;
 import lombok.RequiredArgsConstructor;

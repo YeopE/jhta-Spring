@@ -3,6 +3,31 @@
 <th:block th:replace="~{/index::layout('게시판',~{this::boardList})}">
 	<div th:fragment="boardList">
 		<h2>게시판 페이지입니다.</h2>
+		<table border="1">
+			<tr>
+				<th>글번호</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+			</tr>
+			<tr th:each="dto : ${list}">
+				<td th:text="${dto.postNum}"></td>
+				<td><a th:href="@{/board/info(postNum=${dto.postNum})}" th:text="${dto.title}"></a></td>
+				<td th:text="${dto.member1.getId()}"></td>
+				<td th:text="${#temporals.format(dto.regdate, 'yyyy-MM-dd')}"></td>
+			</tr>
+		</table>
+		<div>
+			<span th:if="${startPage>2}">
+				<a th:href="@{/boardList(page=${startPage-1})}" th:text="이전"></a>
+			</span>
+			<span th:each="num:${#numbers.sequence(startPage,endPage)}">
+				<a th:classappend="${page==num}?active" th:href="@{boardList(page=${num})}">[[${num + 1}]]</a>
+			</span>
+			<span th:if="${endPage<pageCount-1}">
+				<a th:href="@{boardList(page=${endPage+1})}" th:text="다음"></a>
+			</span>
+		</div>
 		<a th:href="@{/member/boardInsert}">글 작성</a>
 	</div>
 </th:block>

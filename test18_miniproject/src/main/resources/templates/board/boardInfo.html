@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:replace="~{/index::layout('글상세보기',~{this::boardInfo})}">
+	<div th:fragment="boardInfo">
+		<h2>글 상세정보</h2>
+		<table border="1">
+			<tr>
+				<td>작성자</td>
+				<td th:text="${dto.member1.getId()}"></td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td th:text="${dto.title}"></td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td th:text="${dto.content}"></td>
+			</tr>
+			<tr th:if="${dto.filename1 != null}">
+				<td>이미지1</td>
+				<td><img th:src="@{|/images/${dto.filename1}|}" width="300"></td>
+			</tr>
+			<tr th:if="${dto.filename2 != null}">
+				<td>이미지2</td>
+				<td><img th:src="@{|/images/${dto.filename2}|}" width="300"></td>
+			</tr>
+			<tr th:if="${dto.filename3 != null}">
+				<td>이미지3</td>
+				<td><img th:src="@{|/images/${dto.filename3}|}" width="300"></td>
+			</tr>
+		</table>
+		<div>
+			<a href="#" onclick="checkUpdateId()">수정</a>
+			<a href="#" onclick="checkDeleteId()">삭제</a>
+		</div>
+
+		<script>
+      const loginId = '[[${#authentication.name}]]';
+      const role = '[[${#authentication.authorities}]]';
+      const writerId = '[[${dto.member1.id}]]';
+      const postNum = '[[${dto.postNum}]]';
+
+      function checkUpdateId() {
+          if (loginId !== writerId) {
+              alert("작성자만 수정할 수 있습니다.");
+              return;
+          }
+          // 수정페이지 이동
+          location.href = '/board/update?postNum=' + postNum;
+      }
+
+			function checkDeleteId() {
+          if (loginId == writerId || role.includes('ADMIN')) {
+              if (confirm('정말 삭제하시겠습니까?')) {
+                  location.href = '/board/delete?postNum=' + postNum;
+              }
+          } else {
+              alert("작성자만 삭제할 수 있습니다.");
+          }
+			}
+		</script>
+	</div>
+</th:block>
+</html>

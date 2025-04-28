@@ -12,8 +12,12 @@ import java.util.Collection;
 public class CustomUserDetails implements UserDetails {
     private Member1 member1;
 
-    public CustomUserDetails(Member1 member1){
-        this.member1=member1;
+    public CustomUserDetails(Member1 member1) {
+        this.member1 = member1;
+    }
+
+    public Member1 getMember1() {
+        return this.member1;
     }
 
     @Override

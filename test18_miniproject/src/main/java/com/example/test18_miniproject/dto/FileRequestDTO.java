@@ -13,5 +13,7 @@ import java.util.List;
 public class FileRequestDTO {
     private Long postNum;
     private String member1;
+    private String title;
+    private String content;
     private List<MultipartFile> fileList;
 }

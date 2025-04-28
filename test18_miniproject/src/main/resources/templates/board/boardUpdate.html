@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/index::layout('글 수정',~{this::boardUpdate})}">
+	<div th:fragment="boardUpdate">
+		<h2>게시글 수정</h2>
+		<form method="post" th:action="@{/board/update}" enctype="multipart/form-data"><br>
+			<input type="hidden" name="postNum" th:value="${dto.postNum}">
+			<label>작성자 아이디</label><br>
+			<input type="text" th:value="${dto.getMember1().getId()}" readonly><br>
+			<label>제목</label><br>
+			<input type="text" name="title" th:value="${dto.getTitle()}"><br>
+			<label>내용</label><br>
+			<textarea name="content" th:text="${dto.getContent()}"></textarea><br>
+			<label>첨부파일</label><br>
+			<input type="file" name="fileList"><br>
+			<input type="file" name="fileList"><br>
+			<input type="file" name="fileList"><br>
+			<input type="submit" value="수정">
+		</form>
+	</div>
+</th:block>
+</html>

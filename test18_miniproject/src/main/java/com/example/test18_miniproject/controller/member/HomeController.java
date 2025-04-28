@@ -1,4 +1,4 @@
-package com.example.test18_miniproject.controller;
+package com.example.test18_miniproject.controller.member;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
