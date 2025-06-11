@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>askView.html</title>
+</head>
+<body>
+	<h1>AI와 대화하기</h1>
+	<form>
+		질문 <input type="text" id="q">
+		<button type="button" id="btn1">확인</button>
+	</form>
+	<div id="loading"></div>
+	<div id="result"></div>
+	<script>
+		document.getElementById("btn1").onclick=async function(e){
+            e.preventDefault();
+            document.getElementById("loading").innerHTML="<span style='blue'>응답을 생성중입니다.....</span>";
+            const q = document.getElementById("q").value;
+            const resp =await fetch(`/ai01/chat01?question=${q}`);
+            const text =await resp.text();
+            document.getElementById("loading").innerHTML="";
+            document.getElementById("result").innerHTML=text;
+		}
+	</script>
+</body>
+</html>

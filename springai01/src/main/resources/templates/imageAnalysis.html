@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>imageAnalysis.html</title>
+</head>
+<body>
+	<div>
+		<h1>AI로 이미지 분석하기</h1>
+		<h4>이미지를 선택해 주세요</h4>
+		<form id="form" enctype="multipart/form-data" method="post">
+			<label>메시지 입력</label>
+			<input type="text" id="msg" size="100"><br>
+			<input type="file" name="image" id="file1" accept="image/*" required>
+			<button type="button" id="btn">확인</button>
+		</form>
+		<div id="result"></div>
+	</div>
+	<script>
+		document.getElementById("btn").addEventListener("click", async function() {
+        const formData = new FormData(); //비동기방식으로 파일을 업로드할때는 FormData를 사용한다.
+        formData.append("file1", document.getElementById("file1").files[0]);
+        formData.append("msg", document.getElementById("msg").value);
+        try {
+            const response = await fetch("/analysis", {
+                method: "POST",
+                body: formData
+            });
+            const text = await response.text();
+            document.getElementById("result").innerHTML=text;
+        } catch (error) {
+            console.error("Error:", error);
+            alert("오류발생! 다시 시도해 주세요.");
+        }
+		})
+	</script>
+</body>
+</html>

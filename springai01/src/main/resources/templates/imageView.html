@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>imageView.html</title>
+</head>
+<body>
+	<h1>이미지 생성하기</h1>
+	<form enctype="application/x-www-form-urlencoded">
+		생성할 이미지 <input type="text" id="desc" size="50">
+		<button type="button" id="btn">확인</button>
+	</form>
+	<div id="loading"></div>
+	<div id="divImages"></div>
+	<script>
+		document.getElementById("btn").onclick=async function (e){
+        document.getElementById("loading").innerHTML="<span style='color:blue'>이미지를 생성중입니다.......</span>";
+				const desc = document.getElementById("desc").value;
+				// 파라미터를 query string으로 보낼때는 URLSearchParams 객체를 사용한다.
+				const params = new URLSearchParams();
+				params.append("desc", desc);
+				const resp = await fetch(`/makeImage`,{
+              method:'post',
+							headers:{
+                  "Content-Type":"application/x-www-form-urlencoded"
+							},
+							body:params
+				});
+				const imgUrl=await resp.text();
+				const img = document.createElement("img");
+				img.src=imgUrl;
+				img.width=400;
+				const divImages = document.getElementById("divImages");
+				divImages.appendChild(img);
+		}
+	</script>
+</body>
+</html>

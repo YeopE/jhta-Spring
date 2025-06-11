@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>hotel.html</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container mt-5">
+		<h1 class="text-center mb-4">RAG기반 호텔 AI 챗봇 서비스</h1>
+		호텔 챗봇은 고객의 질문에 답변하거나 필요한 정보를 제공하는 AI 기반 서비스입니다.
+		<div id="chatBox" class="chat-box border rounded p-3 mb-3 bg-light">
+		</div>
+		<form id="chatForm" class="form-inline">
+			<div>
+				<input type="text" id="messageInput" placeholder="Type your message..." required class="form-control w-100">
+			</div>
+			<button type="submit" class="btn btn-primary ml-2" id="btn">Send</button>
+		</form>
+	</div>
+	<script>
+/*		document.getElementById("btn").onclick= async function(e) {
+            e.preventDefault();
+            const question = document.getElementById("messageInput").value;
+            const resp = await fetch(`/hotelQ?question=${question}`);
+            const answer = await resp.text();
+            const chatBox = document.getElementById("chatBox");
+            chatBox.innerHTML +=
+		            `<div style='margin-top:5px'><span style='colorL:green'>User: </span>${question}</div>`;
+				chatBox.innerHTML += `<div style='margin-top:5px'><span style='color:blue'>Bot: </span>${answer}</div>`;
+		}*/
+
+		document.getElementById("btn").onclick=async function(e){
+      e.preventDefault();
+      const chatBox = document.getElementById("chatBox");
+      const question = document.getElementById("messageInput").value;
+      const resp = await fetch(`/hotelQ1?question=${question}`);
+      chatBox.innerHTML +=
+          `<div style='margin-top:5px'><span style='colorL:green'>User: </span>${question}</div>`;
+      const reader = resp.body.getReader();
+      chatBox.innerHTML += `<div style='margin-top:5px'><span style='color:blue'>Bot: </span>`;
+      const decoder = new TextDecoder("utf-8");
+      while(true){
+          const {done,value} = await reader.read();
+          if(done) break;
+          chatBox.innerHTML += decoder.decode(value); //utf-8로 인코딩하기
+      }
+      chatBox.innerHTML += "</div>";
+		}
+	</script>
+</body>
+</html>

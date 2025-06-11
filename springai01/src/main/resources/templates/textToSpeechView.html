@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>textSpeechView.html</title>
+</head>
+<body>
+	<form>
+		<textarea id="text" cols="50" style="width:500px; height:180px; resize:none"></textarea><br>
+		<button id="btn">오디오로 변환</button>
+	</form>
+	<br><br>
+	<div id="loading"></div>
+	<audio id="audio" controls></audio>
+
+<script>
+	document.getElementById("btn").onclick= async function(e){
+    e.preventDefault();
+    document.getElementById("loading").innerHTML="<span style='color:blue'>오디오로 변환중</span>"
+    const text = document.getElementById("text").value;
+    const resp = await fetch(`/tts2?text=${text}`);
+    const reader = resp.body.getReader();
+    const contentType = resp.headers.get('Content-Type');
+    const data = []; //mp3 파일을 저장할 배열
+    while(true){
+        const {done, value} = await reader.read(); //서버에서 보내온 오디오 데이터 읽어오기
+        if(done) break;
+        data.push(value); //배열에 담기
+    }
+    document.getElementById("loading").innerHTML="";
+    var blob = new Blob(data,{type:contentType}); //서버에서 전송된 데이터를 Blob객체로 만들기
+    const audio = document.getElementById("audio");
+    const url = URL.createObjectURL(blob);
+    audio.src = url;
+    audio.play();
+	}
+</script>
+</body>
+</html>

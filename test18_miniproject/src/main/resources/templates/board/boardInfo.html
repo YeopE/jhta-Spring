@@ -21,7 +21,8 @@
 				<td>이미지1</td>
 				<td><img th:src="@{|/images/${dto.filename1}|}" width="300"></td>
 			</tr>
-			<tr th:if="${dto.filename2 != null}">
+			<tr th:if="${dto.filename2 !=
+			 null}">
 				<td>이미지2</td>
 				<td><img th:src="@{|/images/${dto.filename2}|}" width="300"></td>
 			</tr>
